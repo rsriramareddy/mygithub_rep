@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Placeholder</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <div class="header">
+      <h1><a href="{{ url_for('home') }}">Welcome To Messaging UI !</a></h1>
+      {% for message in get_flashed_messages() %}
+      <p class="flashmessage">{{ message }}</p>
+      {% endfor %}
+    </div>
+    <div class="page">
+      {% block body %}{% endblock %}
+    </div>
+    <div class="footer">
+      <ul>
+
+        {% if session.logged_in %}
+        <li>-</li>
+        <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        <li><a href="{{ url_for('write_new') }}">Write post</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </body>
+</html>

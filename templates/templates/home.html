@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% if post %}
+  <div class="title">
+    <h2>
+      <a href="{{ url_for('view_post', id=post['id']) }}">
+        {{ post.title }}
+      </a>
+    </h2>
+
+    {% if post.time %}
+    <p class="time">Posted: {{ post.time }}</p>
+    {% endif %}
+  </div>
+  <div class="post">
+    {{ post.text }}
+  </div>
+  {% endif %}
+
+  <!-- Post list -->
+  <ul class="entries">
+  {% for entry in entries %}
+    <a href="/post/{{ entry.id }}">
+      <li>{{ entry.title }}</li>
+    </a>
+  {% else %}
+    <li><em>Unbelievable.  No other posts here so far</em>
+  {% endfor %}
+    {% if long %}
+    <a href="/all">
+      <li class="more">More posts</li>
+    </a>
+    {% endif %}
+  </ul>
+{% endblock %}
