@@ -1,0 +1,61 @@
+to delete a message:
+
+curl -X POST http://127.0.0.1:5000/del/12
+
+
+to get specific message based on id:
+
+curl -X GET http://127.0.0.1:5000/post/12
+
+
+to list all messages
+
+curl -X GET http://127.0.0.1:5000/all
+
+------
+{
+  "Messages": [
+    {
+      "id": 15,
+      "time": "August 19, 2018 (00:27 - India Standard Time)",
+      "title": "New post"
+    },
+    {
+      "id": 14,
+      "time": "August 19, 2018 (00:26 - India Standard Time)",
+      "title": "New post"
+    },
+    {
+      "id": 13,
+      "time": "August 19, 2018 (00:21 - India Standard Time)",
+      "title": "Update content"
+    },
+    {
+      "id": 10,
+      "time": "August 17, 2018 (00:02 - India Standard Time)",
+      "title": "eqeq"
+    },
+    {
+      "id": 8,
+      "time": null,
+      "title": "eqae"
+    }
+  ]
+}
+
+
+------
+
+to add new message:
+
+curl -d "title=New post&text=sample message" -X POST http://127.0.0.1:5000/add
+
+
+to update a message:
+
+curl -d "title=Update content&text=sample message" -X POST http://127.0.0.1:5000/update/13
+
+to delete specific message:
+
+curl -X POST http://127.0.0.1:5000/del/12
+
