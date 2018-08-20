@@ -1,30 +1,21 @@
-Flask blog
+Flask App
 ==========
 
-Personal blog written using the Flask microframework.
+Flask App using the Flask microframework.
 
-**This is a personal project and I will probably not be actively maintaining it.**
-
-With that being said. This software is pretty much [WTFPL](https://en.wikipedia.org/wiki/WTFPL) licenced if anything
-
-If you do something with this code, mention me on [Twitter](http://twitter.com/QuadPiece), I'd love to see :3
 
 Requirements
 ============
 
 Python 2.7+, because that's just what Flask recommends.  
-`tmux` to keep the blog running.
 
 Everything else is listed in the `requirements.txt` file.  
 You might also want to make sure that you have `sqlite3` installed on your system so that you can generate the database.
 
-I will not be providing any support for Windows users.
 
 Getting started
 ===============
 
-If you don't care about recent features and just want a stable working release. Check the tags. Every version of the code that I've been using in production without problems for longer periods of time will be listed there.  
-Note that no real tests have been run. I just know that they've been functional for multiple days without major issues.
 
 Setup is fairly easy for this application due to the nature of how it's built. However, I will inform you ahead of time that this is not designed for high-traffic load. Due to things like SQLite usage.
 
@@ -72,34 +63,17 @@ Updating
 2. Do a `git pull` to get the most recent code
 3. Edit any configs in the file so that it works with your existing setup
 4. Sometimes, changes are made to the database structure. To update your database, use the provided sql files. eg. to update from v1.2 to v1.3, which added support for timestamps on posts, run `sqlite3 blog.db < upgrade-v12-v13.sql`
-4. Start the application normally using `python exec.py`, preferrably in a tmux session
+4. Start the application normally using `python exec.py
 
 Usage
 =====
 
-This is really simple at the moment.
 
-Posts are written using Markdown. I recommend taking a little time to [learn it](https://daringfireball.net/projects/markdown/syntax). It's pretty simple and you'll get the basics in a minute or two
+Posts are written using Markdown. 
 
 * You can log in using `example.com/login`, you must do this before anything else on this list will work
 * A logout link and a link to the post editor will appear at the bottom
 * To edit a post, use the link added to the post page. Alternatively, add `/edit` to the post url. To edit `example.com/post/2`, you'd visit `example.com/post/2/edit`
 * To delete a post, replace `post` in the URL with `del`. To delete `example.com/post/3`, you'd just visit `exaple.com/del/3` **WARNING: No confimation, your post will be deleted the instant the server recieves the GET request from your browser**
 
-At the moment, that's it.
 
-For images, upload them somewhere else and add them using regular markdown
-
-Goals
-=====
-
-This project was started to learn some basic Flask and Python features that could come in handy later. Mainly, these features are:
-
-* Using markdown
-* Handling files
-* Templating
-* Some lazy single-user login just to test the session feature
-* ~~Not sure if DB (prolly just SQLite) or static files~~ SQLite apparently
-* Getting used to route-based web development
-
-**Warning, most of the Python code will probably end up being written in a single, messy file. Call me old school or stupid, but "ctrl+f"-ing for the route I want to work on is just how I tend to go about these things**
