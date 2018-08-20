@@ -76,4 +76,268 @@ Posts are written using Markdown.
 * To edit a post, use the link added to the post page. Alternatively, add `/edit` to the post url. To edit `example.com/post/2`, you'd visit `example.com/post/2/edit`
 * To delete a post, replace `post` in the URL with `del`. To delete `example.com/post/3`, you'd just visit `exaple.com/del/3` **WARNING: No confimation, your post will be deleted the instant the server recieves the GET request from your browser**
 
+----------------------------------
+WEB UI Interface
+
+2.	Execution – 
+exec.py
+* Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 502-391-598
+ * Running on http://127.0.0.1:5800/ (Press CTRL+C to quit)
+
+Once launce url would be available on http://127.0.0.1:5800/
+
+3.	UI to interact with the service
+
+a.	Shows the list of messages posted by the users
+
+ 
+
+b.	Allows to post new messages
+Click Write post, enter Message Title and Message post click Post
+
+ 
+
+
+Once the message is posted, Flashes message saying ‘New entry was successfully added’
+ 
+
+
+
+
+
+
+
+
+
+
+
+c.	View all Messages posted
+ 
+
+
+
+
+
+
+
+
+
+
+
+d.	Edit Message:
+Click on specific message to edit the message
+ 
+
+e.	Add appropriate content and click Update button
+
+ 
+
+
+
+Once Updated message appears on list
+
+   
+
+To select a given message to see extra details
+Select a message from the list
+
+ 
+
+f.	View Extra details related to message
+
+ ---------------
+ 
+ REST API TESTS
+ 
+ 3.	Running the code
+exec-api.py – code for api interface
+
+* Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 502-391-598
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+--------------------------------------------------------------------------------
+DEBUG in exec [C:/Users/staples/Documents/Downloads/flask-blog-master/flask-blog-master/exec.py:44]:
+Request processed in 109 ms
+--------------------------------------------------------------------------------
+127.0.0.1 - - [20/Aug/2018 08:43:02] "GET / HTTP/1.1" 200 -
+--------------------------------------------------------------------------------
+DEBUG in exec [C:/Users/staples/Documents/Downloads/flask-blog-master/flask-blog-master/exec.py:44]:
+Request processed in 10 ms
+--------------------------------------------------------------------------------
+127.0.0.1 - - [20/Aug/2018 08:43:07] "GET /all HTTP/1.1" 200 -
+--------------------------------------------------------------------------------
+DEBUG in exec [C:/Users/staples/Documents/Downloads/flask-blog-master/flask-blog-master/exec.py:44]:
+Request processed in 4 ms
+--------------------------------------------------------------------------------
+127.0.0.1 - - [20/Aug/2018 08:47:45] "GET /all HTTP/1.1" 200 -
+--------------------------------------------------------------------------------
+DEBUG in exec [C:/Users/staples/Documents/Downloads/flask-blog-master/flask-blog-master/exec.py:44]:
+Request processed in 105 ms
+--------------------------------------------------------------------------------
+
+4.	Simple REST API Usage
+
+a.	Allows users to submit/post messages
+
+User to post new message:
+Usage:
+curl -d "title=<title> &text=”<message>" -X POST <url>/add
+
+Ex:
+$ curl -d "title=If you want it, work for it.&text=If you want it, work for it." -X POST http://127.0.0.1:5000/add
+{
+  "status": "Added Post: If you want it, work for it.:If you want it, work for it."
+}
+
+
+
+$ curl -d "title=Whatever you are, be a good one&text=Whatever you are, be a good one" -X POST http://127.0.0.1:5000/add
+{
+  "status": "Added Post: Whatever you are, be a good one:Whatever you are, be a good one"
+}
+
+
+
+$ curl -d "title=Do it with passion or not at all.&text=Do it with passion or not at all." -X POST http://127.0.0.1:5000/add
+{
+  "status": "Added Post: Do it with passion or not at all.:Do it with passion or not at all."
+}
+
+
+
+$ curl -d "title=Take the risk or lose the chance&text=Take the risk or lose the chance" -X POST http://127.0.0.1:5000/add
+{
+  "status": "Added Post: Take the risk or lose the chance:Take the risk or lose the chance"
+}
+
+
+
+$ curl -d "title=Don’t dream your life, live your dream.&text=Don’t dream your life, live your dream." -X POST http://127.0.0.1:5000/add
+{
+  "status": "Added Post: Don\u2019t dream your life, live your dream.:Don\u2019t dream your life, live your dream."
+}
+
+
+b.	Lists received messages:
+Usage:
+curl -X GET <url>/all
+
+Ex:
+$ curl -X GET http://127.0.0.1:5000/all
+{
+  "Messages": [
+    {
+      "id": 23,
+      "time": "August 20, 2018 (07:57 - India Standard Time)",
+      "title": "Don\u2019t dream your life, live your dream."
+    },
+    {
+      "id": 22,
+      "time": "August 20, 2018 (07:57 - India Standard Time)",
+      "title": "Take the risk or lose the chance"
+    },
+    {
+      "id": 21,
+      "time": "August 20, 2018 (07:56 - India Standard Time)",
+      "title": "Do it with passion or not at all."
+    },
+    {
+      "id": 20,
+      "time": "August 20, 2018 (07:56 - India Standard Time)",
+      "title": "Whatever you are, be a good one"
+    },
+    {
+      "id": 19,
+      "time": "August 20, 2018 (07:56 - India Standard Time)",
+      "title": "If you want it, work for it."
+    },
+    {
+      "id": 18,
+      "time": "August 20, 2018 (07:53 - India Standard Time)",
+      "title": "Hello Worlds"
+    },
+    {
+      "id": 16,
+      "time": null,
+      "title": "PalindromeCheck"
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+
+c.	Retrieves a specific message on demand, and determines if it is a palindrome.
+To check is message is palindrome or not: 
+Message not Palindrome:
+Usage:
+curl -X GET <url>/post/<postid>
+
+Ex:
+
+$ curl -X GET http://127.0.0.1:5000/post/21
+{
+  "Palindrome Results": "Message :Do it with passion or not at all.: not palindrome",
+  "respose": {
+    "text": "<p>Do it with passion or not at all.</p>",
+    "time": 1534732009.9673285,
+    "title": "Do it with passion or not at all.",
+    "updated": null
+  }
+}
+
+Message Is Palindrome:
+Usage:
+curl -X GET <url>/post/<postid>
+
+$ curl -X GET http://127.0.0.1:5000/post/24
+{
+  "Palindrome Results": "Message :Malayalam: is a palindrome",
+  "respose": {
+    "text": "<p>Malayalam</p>",
+    "time": 1534732953.5809932,
+    "title": "PalindromeCheck",
+    "updated": null
+  }
+}
+
+
+
+d.	Allows users to delete specific messages
+
+Usage:
+curl -X POST <url>/del/<postid>
+
+{
+
+Ex:
+$ curl -X POST http://127.0.0.1:5000/del/18
+{
+  "status": "Deleted Post: 18"
+}
+
+
+
+
+e.	To update a message:
+Usage:
+curl -d "title=<Update content>&text=<sample message>" -X POST <URL>/update/<postid>
+
+Ex:
+$ curl -d "title=Update content&text=sample message" -X POST http://127.0.0.1:5000/update/16
+
+{
+  "status": "Updated: Update content:sample message"
+}
+
+
+
 
